@@ -1,4 +1,4 @@
-<? get_header(); 
+<?php get_header(); 
 
 
     while(have_posts()) {
@@ -57,7 +57,7 @@ if ($theParent or $testArray) { ?>
     <?php the_content(); ?>
     </div>
     </div>
-    <? }
+    <?php }
 
 get_footer();
 ?>

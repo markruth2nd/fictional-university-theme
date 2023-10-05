@@ -3,7 +3,7 @@
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <? wp_head(); ?>
+    <?php wp_head(); ?>
 
 </head>
 <body <?php body_class(); ?>>
@@ -28,7 +28,7 @@
               <li><a href="#">Programs</a></li>
               <li><a href="#">Events</a></li>
               <li><a href="#">Campuses</a></li>
-              <li><a href="#">Blog</a></li>
+              <li <?php if(get_post_type() == 'post') echo 'class="current-menu-item"' ?> ><a href="<?php echo site_url('/blog') ?>">Blog</a></li>
             </ul>
           </nav>
           <div class="site-header__util">
