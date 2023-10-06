@@ -17,3 +17,31 @@ function university_features() {
     add_theme_support('title-tag');
 }
 add_action('after_setup_theme', 'university_features');
+
+
+/* CREATED NEW FILE CALLED 'university-post-types.php' 'mu-plugins' FOLDER IN 'wp-content' folder with the below function which adds a new custom post type called events, below is the code which is in this new file
+
+<?php 
+**** Registering a new custome post type in WordPress named "Event"
+
+function university_post_types() {
+register_post_type('event', array(
+'public' => true, 
+'labels' => array(
+'name' => 'Events',
+'add_new_item' => 'Add New Event',
+'edit_item' => 'Edit Event',
+'all_items' => 'All Events',
+'singular_name' => 'Event'
+),
+'menu_icon' => 'dashicons-calendar-alt', 
+'has_archive' => true,
+'rewrite' => array(
+'slug' => 'events'
+)
+));
+}
+
+add_action( 'init', 'university_post_types' );
+
+*/
