@@ -45,7 +45,12 @@
                 )
             ));
 
-            while($homepageEvents->have_posts()) {
+            if ($homepageEvents->have_posts()) { // this if statement is to check if there are any upcoming events related to the program and then will add the below code
+                echo '<hr class="section-break">';
+                echo '<h2 class="headline headline--medium">Upcoming ' . get_the_title() . ' Events</h2>';
+
+
+            while($homepageEvents->have_posts()) { // this while loop is to display the upcoming events related to the program
                 $homepageEvents->the_post(); ?>
                 <div class="event-summary">
                     <a class="event-summary__date t-center" href="<?php the_permalink(); ?>">
@@ -66,7 +71,9 @@
                         }; ?> <a href="<?php the_permalink(); ?>" class="nu gray">Learn more</a></p>
                     </div>
                 </div>
-            <?php } wp_reset_postdata(); ?>
+            <?php }
+            } wp_reset_postdata(); // this is to reset the global variable $post so that it doesn't interfere with other queries
+            ?>
 
         </div>
 
