@@ -49,8 +49,8 @@ add_action('pre_get_posts', 'university_adjust_queries');
 /* CREATED NEW FILE CALLED 'university-post-types.php' 'mu-plugins' FOLDER IN 'wp-content' folder with the below function which adds a new custom post type called events, below is the code which is in this new file
 
 <?php 
-**** Registering a new custome post type in WordPress named "Event" ****
-
+**** Registering a new custome post type in WordPress named "Event"
+**event post type
 function university_post_types() {
     register_post_type('event', array(
     'public' => true, 
@@ -70,35 +70,32 @@ function university_post_types() {
     'supports' => array('title', 'editor', 'excerpt') // This will enable the title, editor and excerpt fields in custom post types
     
     ));
-
-
-(*** program post type ***)
-
-register_post_type('program', array(
-    'public' => true, 
-    'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
-    'labels' => array(
-    'name' => 'Programs', // This will change the name of the post type to "Events" instead of "Event"
-    'add_new_item' => 'Add New Program',
-    'edit_item' => 'Edit Program',
-    'all_items' => 'All Programs',
-    'singular_name' => 'Program'
-    ),
-    'menu_icon' => 'dashicons-awards', // This will change the icon of the post type to a calendar icon
-    'has_archive' => true, // This will enable the archive page for this post type
-    'rewrite' => array(
-    'slug' => 'programs' // This will change the slug of the archive page to "events" instead of "event"
-    ),
-    'supports' => array('title', 'editor') // This will enable the title, editor and excerpt fields in custom post types
     
-    ));
-}
-
-add_action( 'init', 'university_post_types' );
-
+    //program post type
+    
+    register_post_type('program', array(
+        'public' => true, 
+        'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
+        'labels' => array(
+        'name' => 'Programs', // This will change the name of the post type to "Events" instead of "Event"
+        'add_new_item' => 'Add New Program',
+        'edit_item' => 'Edit Program',
+        'all_items' => 'All Programs',
+        'singular_name' => 'Program'
+        ),
+        'menu_icon' => 'dashicons-awards', // This will change the icon of the post type to a calendar icon
+        'has_archive' => true, // This will enable the archive page for this post type
+        'rewrite' => array(
+        'slug' => 'programs' // This will change the slug of the archive page to "events" instead of "event"
+        ),
+        'supports' => array('title', 'editor') // This will enable the title, editor and excerpt fields in custom post types
+        
+        ));
     }
     
     add_action( 'init', 'university_post_types' );
+    
+    
     
     
 
