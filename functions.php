@@ -19,6 +19,13 @@ function university_features() {
 add_action('after_setup_theme', 'university_features');
 
 function university_adjust_queries($query) {
+    if (!is_admin() AND is_post_type_archive('program') AND is_main_query()) {
+        $query->set('orderby', 'title');
+        $query->set('order', 'ASC');
+        $query->set('posts_per_page', -1); // this is to show all posts on the page
+    }
+
+
     if(!is_admin() AND is_post_type_archive('event') AND $query->is_main_query()) {
         $today = date('Ymd'); // this is the current date set as a variable
         $query->set('meta_key', 'event_date'); // meta_key is the name by which the meta_value is retrieved,
@@ -63,6 +70,32 @@ function university_post_types() {
     'supports' => array('title', 'editor', 'excerpt') // This will enable the title, editor and excerpt fields in custom post types
     
     ));
+
+
+(*** program post type ***)
+
+register_post_type('program', array(
+    'public' => true, 
+    'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
+    'labels' => array(
+    'name' => 'Programs', // This will change the name of the post type to "Events" instead of "Event"
+    'add_new_item' => 'Add New Program',
+    'edit_item' => 'Edit Program',
+    'all_items' => 'All Programs',
+    'singular_name' => 'Program'
+    ),
+    'menu_icon' => 'dashicons-awards', // This will change the icon of the post type to a calendar icon
+    'has_archive' => true, // This will enable the archive page for this post type
+    'rewrite' => array(
+    'slug' => 'programs' // This will change the slug of the archive page to "events" instead of "event"
+    ),
+    'supports' => array('title', 'editor') // This will enable the title, editor and excerpt fields in custom post types
+    
+    ));
+}
+
+add_action( 'init', 'university_post_types' );
+
     }
     
     add_action( 'init', 'university_post_types' );
