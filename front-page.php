@@ -17,9 +17,9 @@
     <h2 class="headline headline--small-plus t-center">Upcoming Events</h2>
 
     <?php 
-    $today = date('Ymd'); // this is the current date
+    $today = date('Ymd'); // this is the current date set as a variable
     $homepageEvents = new WP_Query(array(
-        'posts_per_page' => -1,
+        'posts_per_page' => 2,
         'post_type' => 'event',
         'meta_key' => 'event_date', // meta_key is the name by which the meta_value is retrieved,
         'orderby' => 'meta_value_num', // this is to order by the meta_value as a number

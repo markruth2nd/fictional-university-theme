@@ -18,6 +18,26 @@ function university_features() {
 }
 add_action('after_setup_theme', 'university_features');
 
+function university_adjust_queries($query) {
+    if(!is_admin() AND is_post_type_archive('event') AND $query->is_main_query()) {
+        $today = date('Ymd'); // this is the current date set as a variable
+        $query->set('meta_key', 'event_date'); // meta_key is the name by which the meta_value is retrieved,
+        $query->set('orderby', 'meta_value_num'); // this is to order by the meta_value as a number
+        $query->set('order', 'ASC'); // this is to order the meta_value as ascending instead of descending
+        $query->set('meta_query', array( // this is to filter out past events
+            array( 
+            'key' => 'event_date', 
+            'compare' => '>=',
+            'value' => $today, 
+            'type' => 'numeric' // this is to make sure the date is a number
+            )
+        ));
+    }
+}
+
+add_action('pre_get_posts', 'university_adjust_queries');
+
+
 
 /* CREATED NEW FILE CALLED 'university-post-types.php' 'mu-plugins' FOLDER IN 'wp-content' folder with the below function which adds a new custom post type called events, below is the code which is in this new file
 
