@@ -61,7 +61,6 @@ get_header();
             'total' => $pastEvents->max_num_pages // this is to make sure pagination works to the max number of pages for the past events page
         ));
     ?>
-
 </div>
 
 <?php get_footer();
