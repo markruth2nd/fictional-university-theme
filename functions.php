@@ -42,27 +42,31 @@ add_action('pre_get_posts', 'university_adjust_queries');
 /* CREATED NEW FILE CALLED 'university-post-types.php' 'mu-plugins' FOLDER IN 'wp-content' folder with the below function which adds a new custom post type called events, below is the code which is in this new file
 
 <?php 
-**** Registering a new custome post type in WordPress named "Event"
+**** Registering a new custome post type in WordPress named "Event" ****
 
 function university_post_types() {
-register_post_type('event', array(
-'public' => true, 
-'show_in_rest' => true,
-'labels' => array(
-'name' => 'Events',
-'add_new_item' => 'Add New Event',
-'edit_item' => 'Edit Event',
-'all_items' => 'All Events',
-'singular_name' => 'Event'
-),
-'menu_icon' => 'dashicons-calendar-alt', 
-'has_archive' => true,
-'rewrite' => array(
-'slug' => 'events'
-)
-));
-}
-
-add_action( 'init', 'university_post_types' );
+    register_post_type('event', array(
+    'public' => true, 
+    'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
+    'labels' => array(
+    'name' => 'Events', // This will change the name of the post type to "Events" instead of "Event"
+    'add_new_item' => 'Add New Event',
+    'edit_item' => 'Edit Event',
+    'all_items' => 'All Events',
+    'singular_name' => 'Event'
+    ),
+    'menu_icon' => 'dashicons-calendar-alt', // This will change the icon of the post type to a calendar icon
+    'has_archive' => true, // This will enable the archive page for this post type
+    'rewrite' => array(
+    'slug' => 'events' // This will change the slug of the archive page to "events" instead of "event"
+    ),
+    'supports' => array('title', 'editor', 'excerpt') // This will enable the title, editor and excerpt fields in custom post types
+    
+    ));
+    }
+    
+    add_action( 'init', 'university_post_types' );
+    
+    
 
 */

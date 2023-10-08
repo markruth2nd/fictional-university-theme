@@ -6,20 +6,39 @@ get_header();
 <div class="page-banner">
     <div class="page-banner__bg-image" style="background-image: url(<?php echo get_theme_file_uri('images/ocean.jpg') ?>)"></div>
         <div class="page-banner__content container container--narrow">
-    <h1 class="page-banner__title">All Events</h1>
+    <h1 class="page-banner__title">Past Events</h1>
         
     <!-- The below is a breakdown of the_archive_title(); function if need to do seperately -->
 <!-- <?php if (is_category()) { single_cat_title(); } if (is_author()) { echo 'Posts by '; the_author();} ?>-->
     <div class="page-banner__intro">
-        <p>See what is going on in our world!</p>
+        <p>A recap of our past events.</p>
         </div>
     </div>
 </div>
 
 <div class="container container--narrow page-section">
     <?php 
-    while(have_posts()) {
-        the_post(); ?>
+
+    $today = date('Ymd'); // this is the current date set as a variable
+    $pastEvents = new WP_Query(array(
+        'paged' => get_query_var('paged', 1), // this is to make sure pagination works kepping posts in order throughout the pages.
+        'posts_per_page' => 1, // this decides how many posts per page
+        'post_type' => 'event',
+        'meta_key' => 'event_date', // meta_key is the name by which the meta_value is retrieved,
+        'orderby' => 'meta_value_num', // this is to order by the meta_value as a number
+        'order' => 'ASC', // this is to order the meta_value as ascending instead of descending
+        'meta_query' => array( // this is to filter out past events
+            array( 
+            'key' => 'event_date', 
+            'compare' => '<',
+            'value' => $today, 
+            'type' => 'numeric' // this is to make sure the date is a number
+            )
+        )
+    ));
+
+    while($pastEvents->have_posts()) {
+        $pastEvents->the_post(); ?>
 
 <div class="event-summary">
 <a class="event-summary__date t-center" href="#">
@@ -37,15 +56,15 @@ get_header();
     </div>
 </div>
 
-        <?php }
-        echo paginate_links();
+    <?php }
+        echo paginate_links(array(
+            'total' => $pastEvents->max_num_pages // this is to make sure pagination works to the max number of pages for the past events page
+        ));
     ?>
-
-        <hr class="section-break">
-    <p>See all previous events <a href="<?php echo site_url('/past-events') ?>">HERE!</a></p>
 
 </div>
 
 <?php get_footer();
 
 ?>
+
