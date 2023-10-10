@@ -11,13 +11,17 @@ function university_files() {
 add_action('wp_enqueue_scripts', 'university_files');
 
 function university_features() {
-    register_nav_menu('headerMenuLocation', 'Header Menu Location');
-    register_nav_menu('footerLocationOne', 'Footer Location One');
-    register_nav_menu('footerLocationTwo', 'Footer Location Two');
     add_theme_support('title-tag');
     add_theme_support('post-thumbnails'); // this is to add the featured image option to the post
     add_image_size('professorLandscape', 400, 260, true); // this is to add a new image size for the professor image
     add_image_size('professorPortrait', 480, 650, true); // this is to add a new image size for the professor image
+    add_image_size('pageBanner', 1500, 350, true); // this is to add a new image size for the page banner image
+
+
+    /* register_nav_menu('headerMenuLocation', 'Header Menu Location');
+    register_nav_menu('footerLocationOne', 'Footer Location One');
+    register_nav_menu('footerLocationTwo', 'Footer Location Two'); */
+    
 }
 
 add_action('after_setup_theme', 'university_features');
@@ -98,19 +102,18 @@ function university_post_types() {
 
         **professors post type
 
-register_post_type('professors', array(
+register_post_type('professor', array(
+    'supports' => array('title', 'editor', 'thumbnail'), // This will enable the title, editor and excerpt fields in custom post types
     'public' => true, 
-    'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
     'labels' => array(
-    'name' => 'professors', // This will change the name of the post type to "Events" instead of "Event"
-    'add_new_item' => 'Add New professor',
-    'edit_item' => 'Edit professor',
-    'all_items' => 'All professors',
-    'singular_name' => 'professor'
-    ),
-    'menu_icon' => 'dashicons-welcome-learn-more', // This will change the icon of the post type to a calendar icon
-    'supports' => array('title', 'editor') // This will enable the title, editor and excerpt fields in custom post types
-    
+        'name' => 'Professors', // This will change the name of the post type to "professors" instead of "professor"
+        'add_new_item' => 'Add New Professor',
+        'edit_item' => 'Edit Professor',
+        'all_items' => 'All Professors',
+        'singular_name' => 'professor'
+        ),
+    'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
+    'menu_icon' => 'dashicons-welcome-learn-more' // This will change the icon of the post type to a calendar icon
     ));
     }
     
