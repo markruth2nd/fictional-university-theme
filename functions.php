@@ -71,7 +71,7 @@ function university_post_types() {
     
     ));
     
-    //program post type
+    **program post type
     
     register_post_type('program', array(
         'public' => true, 
@@ -91,6 +91,23 @@ function university_post_types() {
         'supports' => array('title', 'editor') // This will enable the title, editor and excerpt fields in custom post types
         
         ));
+
+        **professors post type
+
+register_post_type('professors', array(
+    'public' => true, 
+    'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
+    'labels' => array(
+    'name' => 'professors', // This will change the name of the post type to "Events" instead of "Event"
+    'add_new_item' => 'Add New professor',
+    'edit_item' => 'Edit professor',
+    'all_items' => 'All professors',
+    'singular_name' => 'professor'
+    ),
+    'menu_icon' => 'dashicons-welcome-learn-more', // This will change the icon of the post type to a calendar icon
+    'supports' => array('title', 'editor') // This will enable the title, editor and excerpt fields in custom post types
+    
+    ));
     }
     
     add_action( 'init', 'university_post_types' );
