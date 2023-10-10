@@ -45,10 +45,18 @@ get_header();
                 echo '<h2 class="headline headline--medium">' . get_the_title() . ' Professors</h2>';
 
 
+                echo '<ul class="professor-cards">';
             while($relatedProfessors->have_posts()) { // this while loop is to display the upcoming events related to the program
                 $relatedProfessors->the_post(); ?>
-                <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
+                <li class="professor-card__list-item">
+                    <a class="professor-card" href="<?php the_permalink(); ?>">
+                        <img class="professor-card__image" src="<?php the_post_thumbnail_url('professorLandscape'); ?>">
+                        <span class="professor-card__name"><?php the_title(); ?></span>
+                    
+                    </a>
+                </li>
             <?php }
+            echo '</ul>';
             }
 
             wp_reset_postdata(); // this is to reset the global variable $post so that it doesn't interfere with other queries
