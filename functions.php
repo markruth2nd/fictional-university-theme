@@ -18,9 +18,9 @@ function university_features() {
     add_image_size('pageBanner', 1500, 350, true); // this is to add a new image size for the page banner image
 
 
-    /* register_nav_menu('headerMenuLocation', 'Header Menu Location');
+    register_nav_menu('headerMenuLocation', 'Header Menu Location');
     register_nav_menu('footerLocationOne', 'Footer Location One');
-    register_nav_menu('footerLocationTwo', 'Footer Location Two'); */
+    register_nav_menu('footerLocationTwo', 'Footer Location Two');
     
 }
 
