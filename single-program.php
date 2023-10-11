@@ -88,7 +88,6 @@ get_header();
             ?>
 
         </div>
-
         
         <hr>
     <?php }
