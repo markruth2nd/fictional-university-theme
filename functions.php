@@ -145,5 +145,4 @@ register_post_type('professor', array(
     }
     
     add_action( 'init', 'university_post_types' );
-    
 */
