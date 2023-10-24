@@ -79,11 +79,42 @@ function university_adjust_queries($query) {
 
 add_action('pre_get_posts', 'university_adjust_queries');
 
+function universityMapKey($api) {
+    $api['key'] = 'AIzaSyCeSa4OEpOmz_YhGZln5ZXO4TpFk225IwA';
+    return $api;
+}
+
+
+add_filter('acf/fields/google_map/api', 'universityMapKey');
 
 
 /* CREATED NEW FILE CALLED 'university-post-types.php' 'mu-plugins' FOLDER IN 'wp-content' folder with the below function which adds a new custom post type called events, below is the code which is in this new file
 
 <?php 
+
+**** Registering a new custome post type in WordPress named "Campus"
+**campus post type
+
+register_post_type('campus', array(
+        'public' => true, //makes it visible to the public and other editors
+        'show_in_rest' => true, //makes it visible in the REST API
+        'labels' => array( //changes the name of the post type in the admin panel and other admin areas/items
+            'name' => 'Campuses', //changes the name of the post type in the admin panel to Campuss
+            'add_new_item' => 'Add New Campus', //changes the name of the post type in the admin panel to add new Campus
+            'edit_item' => 'Edit Campus', //changes the name of the post type in the admin panel to edit Campus
+            'all_items' => 'All Campuses', //changes the name of the post type in the admin panel to all Campuss
+            'singular_name' => 'Campus' //changes the name of the post type in the admin panel to Campus
+        ),
+    'menu_icon' => 'dashicons-location-alt', // This will change the icon of the post type to a calendar icon
+    'has_archive' => true, // This will enable the archive page for this post type
+    'rewrite' => array(
+    'slug' => 'campuses' // This will change the slug of the archive page to "events" instead of "event"
+    ),
+    'supports' => array('title', 'editor', 'excerpt') // This will enable the title, editor and excerpt fields in custom post types
+    
+    ));
+
+
 **** Registering a new custome post type in WordPress named "Event"
 **event post type
 function university_post_types() {
@@ -146,3 +177,4 @@ register_post_type('professor', array(
     
     add_action( 'init', 'university_post_types' );
 */
+

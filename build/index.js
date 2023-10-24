@@ -21,7 +21,9 @@ __webpack_require__.r(__webpack_exports__);
 // Instantiate a new object using our modules/classes
 const mobileMenu = new _modules_MobileMenu__WEBPACK_IMPORTED_MODULE_1__["default"]();
 const heroSlider = new _modules_HeroSlider__WEBPACK_IMPORTED_MODULE_2__["default"]();
-alert("Hello, this is a test");
+
+/* 
+alert("Hello, this is a test") */
 
 /***/ }),
 
