@@ -15,7 +15,7 @@ pageBanner(array(
         the_post();
         $mapLocation = get_field('map_location');
         ?>
-    <div class="marker" data-lat="<?php echo $mapLoaction['lat'] ?>" data-lng="<?php echo $mapLoaction['lng'] ?>"></div>
+    <div class="marker" data-lat="<?php echo $mapLoaction['lat']; ?>" data-lng="<?php echo $mapLoaction['lng']; ?>"></div>
 
         <?php }
         echo paginate_links();
