@@ -14,8 +14,9 @@ pageBanner(array(
     while(have_posts()) {
         the_post();
         $mapLocation = get_field('map_location');
+        do_action('qm/debug', $mapLocation);
         ?>
-    <div class="marker" data-lat="<?php echo $mapLoaction['lat']; ?>" data-lng="<?php echo $mapLoaction['lng']; ?>"></div>
+    <div class="marker" data-lat="<?php echo $mapLocation['lat']; ?>" data-lng="<?php echo $mapLocation['lng']; ?>"></div>
 
         <?php }
         echo paginate_links();
