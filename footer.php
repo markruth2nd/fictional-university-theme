@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-</footer>
+</footer>   
 
 <div class="search-overlay ">
     <div class="search-overlay__top">
@@ -76,7 +76,12 @@
             <input type="text" class="search-term" placeholder="What are you looking for?" id="search-term" autocomplete="off">
             <i class="fa fa-window-close search-overlay__close" aria-hidden="true"></i>
         </div>
+
+        <div class="container">
+            <div id="search-overlay__results"></div>
+        </div>
     </div>
+</div>
 
     <?php wp_footer(); ?>
 
