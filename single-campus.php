@@ -62,40 +62,6 @@ while (have_posts()) {
             echo '</ul>';
         }
 
-        wp_reset_postdata(); // this is to reset the global variable $post so that it doesn't interfere with other queries
-
-        $today = date('Ymd');
-        $homepageEvents = new WP_Query(array(
-            'posts_per_page' => 2,
-            'post_type' => 'event',
-            'meta_key' => 'event_date',
-            'orderby' => 'meta_value_num',
-            'order' => 'ASC',
-            'meta_query' => array(
-                array(
-                    'key' => 'event_date',
-                    'compare' => '>=',
-                    'value' => $today,
-                    'type' => 'numeric'
-                ),
-                array( // this nested array is to filter out events that are not related to the program for upcoming events which are related to the program
-                    'key' => 'related_programs',
-                    'compare' => 'LIKE',
-                    'value' => '"' . get_the_ID() . '"' // this is to make sure the ID is not a part of another ID
-                )
-            )
-        ));
-
-        if ($homepageEvents->have_posts()) { // this if statement is to check if there are any upcoming events related to the program and then will add the below code
-            echo '<hr class="section-break">';
-            echo '<h2 class="headline headline--medium">Upcoming ' . get_the_title() . ' Events</h2>';
-
-
-            while ($homepageEvents->have_posts()) { // this while loop is to display the upcoming events related to the program
-                $homepageEvents->the_post();
-                get_template_part('template-parts/content-event'); // this is to call the event.php file
-            }
-        }
 
         wp_reset_postdata(); // this is to reset the global variable $post so that it doesn't interfere with other queries
         $relatedCampuses = get_field('related_campus');
