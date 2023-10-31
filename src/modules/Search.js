@@ -94,6 +94,7 @@ class Search {
 
   }
 
+  
   keyPressDispatcher(e) {
     if (
       e.keyCode == 83 &&
