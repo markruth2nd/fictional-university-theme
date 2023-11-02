@@ -1,5 +1,7 @@
 <?php
 
+require get_theme_file_path('/inc/search-route.php');
+
 function university_custom_rest() {
     register_rest_field('post', 'authorName', array(
         'get_callback' => function() {return get_the_author();}
@@ -183,6 +185,7 @@ function university_post_types() {
         **professors post type
 
 register_post_type('professor', array(
+    'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
     'supports' => array('title', 'editor', 'thumbnail'), // This will enable the title, editor and excerpt fields in custom post types
     'public' => true, 
     'labels' => array(
