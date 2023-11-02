@@ -138,7 +138,6 @@ register_post_type('campus', array(
     
     ));
 
-
 **** Registering a new custome post type in WordPress named "Event"
 **event post type
 function university_post_types() {
