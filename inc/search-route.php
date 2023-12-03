@@ -9,10 +9,10 @@ function universityRegisterSearch() {
     ));
 }
 
-function universitySearchResults() {
+function universitySearchResults($data) {
     $mainQuery = new WP_Query(array(
         'post_type' => array('post', 'page', 'professor', 'program', 'campus', 'event'),
-        's' => sanitize_text_field($_GET['term'])
+        's' => sanitize_text_field($data['term'])
     ));
 
     $results = array(
