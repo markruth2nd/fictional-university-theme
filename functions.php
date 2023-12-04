@@ -119,7 +119,15 @@ add_filter('acf/fields/google_map/api', 'universityMapKey');
 **** Registering a new custome post type in WordPress named "Campus"
 **campus post type
 
-register_post_type('campus', array(
+
+
+<?php 
+/* Registering a new custome post type in WordPress named "Event" */
+// event post type
+/*
+function university_post_types()
+{
+    register_post_type('campus', array(
         'public' => true, //makes it visible to the public and other editors
         'show_in_rest' => true, //makes it visible in the REST API
         'labels' => array( //changes the name of the post type in the admin panel and other admin areas/items
@@ -129,76 +137,74 @@ register_post_type('campus', array(
             'all_items' => 'All Campuses', //changes the name of the post type in the admin panel to all Campuss
             'singular_name' => 'Campus' //changes the name of the post type in the admin panel to Campus
         ),
-    'menu_icon' => 'dashicons-location-alt', // This will change the icon of the post type to a calendar icon
-    'has_archive' => true, // This will enable the archive page for this post type
-    'rewrite' => array(
-    'slug' => 'campuses' // This will change the slug of the archive page to "events" instead of "event"
-    ),
-    'supports' => array('title', 'editor', 'excerpt') // This will enable the title, editor and excerpt fields in custom post types
-    
+        'menu_icon' => 'dashicons-location-alt', // This will change the icon of the post type to a calendar icon
+        'has_archive' => true, // This will enable the archive page for this post type
+        'rewrite' => array(
+            'slug' => 'campuses' // This will change the slug of the archive page to "events" instead of "event"
+        ),
+        'supports' => array('title', 'editor', 'excerpt') // This will enable the title, editor and excerpt fields in custom post types
+
     ));
 
-**** Registering a new custome post type in WordPress named "Event"
-**event post type
-function university_post_types() {
     register_post_type('event', array(
-    'public' => true, 
-    'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
-    'labels' => array(
-    'name' => 'Events', // This will change the name of the post type to "Events" instead of "Event"
-    'add_new_item' => 'Add New Event',
-    'edit_item' => 'Edit Event',
-    'all_items' => 'All Events',
-    'singular_name' => 'Event'
-    ),
-    'menu_icon' => 'dashicons-calendar-alt', // This will change the icon of the post type to a calendar icon
-    'has_archive' => true, // This will enable the archive page for this post type
-    'rewrite' => array(
-    'slug' => 'events' // This will change the slug of the archive page to "events" instead of "event"
-    ),
-    'supports' => array('title', 'editor', 'excerpt') // This will enable the title, editor and excerpt fields in custom post types
-    
+        'public' => true, //makes it visible to the public and other editors
+        'show_in_rest' => true, //makes it visible in the REST API
+        'labels' => array( //changes the name of the post type in the admin panel and other admin areas/items
+            'name' => 'Events', //changes the name of the post type in the admin panel to Events
+            'add_new_item' => 'Add New Event', //changes the name of the post type in the admin panel to add new Event
+            'edit_item' => 'Edit Event', //changes the name of the post type in the admin panel to edit Event
+            'all_items' => 'All Events', //changes the name of the post type in the admin panel to all Events
+            'singular_name' => 'Event' //changes the name of the post type in the admin panel to Event
+        ),
+        'menu_icon' => 'dashicons-calendar-alt', // This will change the icon of the post type to a calendar icon
+        'has_archive' => true, // This will enable the archive page for this post type
+        'rewrite' => array(
+            'slug' => 'events' // This will change the slug of the archive page to "events" instead of "event"
+        ),
+        'supports' => array('title', 'editor', 'excerpt') // This will enable the title, editor and excerpt fields in custom post types
+
     ));
-    
-    **program post type
-    
+
+    //program post type
+
     register_post_type('program', array(
-        'public' => true, 
+        'public' => true,
         'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
         'labels' => array(
-        'name' => 'Programs', // This will change the name of the post type to "Events" instead of "Event"
-        'add_new_item' => 'Add New Program',
-        'edit_item' => 'Edit Program',
-        'all_items' => 'All Programs',
-        'singular_name' => 'Program'
+            'name' => 'Programs', // This will change the name of the post type to "Events" instead of "Event"
+            'add_new_item' => 'Add New Program',
+            'edit_item' => 'Edit Program',
+            'all_items' => 'All Programs',
+            'singular_name' => 'Program'
         ),
         'menu_icon' => 'dashicons-awards', // This will change the icon of the post type to a calendar icon
         'has_archive' => true, // This will enable the archive page for this post type
         'rewrite' => array(
-        'slug' => 'programs' // This will change the slug of the archive page to "events" instead of "event"
+            'slug' => 'programs' // This will change the slug of the archive page to "events" instead of "event"
         ),
-        'supports' => array('title', 'editor') // This will enable the title, editor and excerpt fields in custom post types
-        
-        ));
+        'supports' => array('title') // This will enable the title, editor and excerpt fields in custom post types
 
-        **professors post type
-
-register_post_type('professor', array(
-    'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
-    'supports' => array('title', 'editor', 'thumbnail'), // This will enable the title, editor and excerpt fields in custom post types
-    'public' => true, 
-    'labels' => array(
-        'name' => 'Professors', // This will change the name of the post type to "professors" instead of "professor"
-        'add_new_item' => 'Add New Professor',
-        'edit_item' => 'Edit Professor',
-        'all_items' => 'All Professors',
-        'singular_name' => 'professor'
-        ),
-    'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
-    'menu_icon' => 'dashicons-welcome-learn-more' // This will change the icon of the post type to a calendar icon
     ));
-    }
-    
-    add_action( 'init', 'university_post_types' );
+
+    //professors post type
+
+    register_post_type('professor', array(
+        'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
+        'supports' => array('title', 'editor', 'thumbnail'), // This will enable the title, editor and excerpt fields in custom post types
+        'public' => true,
+        'labels' => array(
+            'name' => 'Professors', // This will change the name of the post type to "professors" instead of "professor"
+            'add_new_item' => 'Add New Professor',
+            'edit_item' => 'Edit Professor',
+            'all_items' => 'All Professors',
+            'singular_name' => 'professor'
+        ),
+        'show_in_rest' => true, // This will enable the Gutenberg editor for this post type
+        'menu_icon' => 'dashicons-welcome-learn-more' // This will change the icon of the post type to a calendar icon
+    ));
+}
+
+add_action('init', 'university_post_types');
+
 */
 
