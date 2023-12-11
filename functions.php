@@ -111,6 +111,49 @@ function universityMapKey($api) {
 
 add_filter('acf/fields/google_map/api', 'universityMapKey');
 
+// Redirect subscriber accounts out of admin and onto homepage
+add_action('admin_init', 'redirectSubsToFrontend');
+
+function redirectSubsToFrontend() {
+    $ourCurrentUser = wp_get_current_user();
+    if (count($ourCurrentUser->roles) == 1 AND $ourCurrentUser->roles[0] == 'subscriber') {
+        wp_redirect(site_url('/'));
+        exit;
+    }
+}
+
+add_action('wp_loaded', 'noSubsAdminBar');
+
+function noSubsAdminBar() {
+    $ourCurrentUser = wp_get_current_user();
+    if (count($ourCurrentUser->roles) == 1 AND $ourCurrentUser->roles[0] == 'subscriber') {
+        show_admin_bar(false);
+    }
+}
+
+// Customize login screen
+add_filter('login_headerurl', 'ourHeaderUrl');
+
+function ourHeaderUrl() {
+    return esc_url(site_url('/'));
+}
+
+// this is to change the name of the login screen from "Powered by WordPress" to "Return to Fictional University" and loads in your own CSS file
+add_action('login_enqueue_scripts', 'ourLoginCSS');
+
+function ourLoginCSS() {
+    wp_enqueue_style('university_main_styles', get_theme_file_uri('/build/style-index.css'));
+    wp_enqueue_style('university_extra_styles', get_theme_file_uri('/build/index.css'));
+    wp_enqueue_style('font-awesome', '//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+    wp_enqueue_style('custom-google-fonts', '//fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i|Roboto:100,300,400,400i,700,700i');
+}
+
+// this is to change the name of the login screen from "Powered by WordPress" to "Return to Fictional University"
+add_filter('login_headertitle', 'ourLoginTitle');
+
+function ourLoginTitle() {
+    return get_bloginfo('name');
+}
 
 /* CREATED NEW FILE CALLED 'university-post-types.php' 'mu-plugins' FOLDER IN 'wp-content' folder with the below function which adds a new custom post type called events, below is the code which is in this new file
 
@@ -142,7 +185,9 @@ function university_post_types()
         'rewrite' => array(
             'slug' => 'campuses' // This will change the slug of the archive page to "events" instead of "event"
         ),
-        'supports' => array('title', 'editor', 'excerpt') // This will enable the title, editor and excerpt fields in custom post types
+        'supports' => array('title', 'editor', 'excerpt'), // This will enable the title, editor and excerpt fields in custom post types
+    'capability_type' => 'campus', // This will change the capability type to "event" instead of "post"
+    'map_meta_cap' => true // This will enable the capability to add events to only the users who have the "edit_events" capability // This will enable the title, editor and excerpt fields in custom post types
 
     ));
 
@@ -161,7 +206,10 @@ function university_post_types()
         'rewrite' => array(
             'slug' => 'events' // This will change the slug of the archive page to "events" instead of "event"
         ),
-        'supports' => array('title', 'editor', 'excerpt') // This will enable the title, editor and excerpt fields in custom post types
+        'supports' => array('title', 'editor', 'excerpt'), // This will enable the title, editor and excerpt fields in custom post types
+    'capability_type' => 'event', // This will change the capability type to "event" instead of "post"
+    
+    'map_meta_cap' => true // This will enable the capability to add events to only the users who have the "edit_events" capability // This will enable the title, editor and excerpt fields in custom post types
 
     ));
 
