@@ -16,6 +16,42 @@
                         <?php the_post_thumbnail('professorPortrait') ?>
                     </div>
                     <div class="two-thirds">
+                        <?php 
+                            $likeCount = new WP_Query(array(
+                                'post_type' => 'like',
+                                'meta_query' => array(
+                                    array(
+                                        'key' => 'liked_professor_id',
+                                        'compare' => '=',
+                                        'value' => get_the_ID()
+                                    )
+                                )
+                            ));
+
+                            $existStatus = 'no';
+
+                            $existQuery = new WP_Query(array(
+                                'author' => get_current_user_id(),
+                                'post_type' => 'like',
+                                'meta_query' => array(
+                                    array(
+                                        'key' => 'liked_professor_id',
+                                        'compare' => '=',
+                                        'value' => get_the_ID()
+                                    )
+                                )
+                            ));
+
+                            if ($existQuery->found_posts) {
+                                $existStatus = 'yes';
+                            }
+
+                        ?>
+                        <span class="like-box" data-exists="<?php echo $existStatus; ?>"> 
+                        <i class="like-box__icon fa fa-heart-o" aria-hidden="true"></i>
+                        <i class="like-box__icon fa fa-heart" aria-hidden="true"></i>
+                        <span class="like-box__count"><?php echo $likeCount->found_posts; ?></span>
+                        </span>
                         <?php the_content(); ?>
                 </div>
             </div>

@@ -276,5 +276,24 @@ function university_post_types()
 
 add_action('init', 'university_post_types');
 
+//like post type
+    register_post_type('like',
+        array(
+            'public' => false,
+            'show_ui' => true,
+            'labels' => array(
+                'name' => 'Likes', // This will change the name of the post type to "Events" instead of "Event"
+                'add_new_item' => 'Add New Like',
+                'edit_item' => 'Edit Like',
+                'all_items' => 'All Likes',
+                'singular_name' => 'Like'
+            ),
+            'menu_icon' => 'dashicons-heart', // This will change the icon of the post type to a calendar icon
+            'supports' => array('title') // This will enable the title, editor and excerpt fields in custom post types
+
+        )
+    );
+
+
 */
 
